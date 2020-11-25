@@ -9,13 +9,14 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"fmt"
-	"bufio"
 	"os"
 	"strings"
 	"syscall"
-	"go-azuredevops/azuredevops"
+
+	"github.com/mcdafydd/go-azuredevops/azuredevops"
 	"golang.org/x/crypto/ssh/terminal"
 )
 
@@ -29,7 +30,7 @@ func main() {
 	bytePassword, _ := terminal.ReadPassword(int(syscall.Stdin))
 	token := string(bytePassword)
 	fmt.Print("\n")
-	
+
 	r = bufio.NewReader(os.Stdin)
 	fmt.Print("Azure Devops User name: ")
 	userName, _ := r.ReadString('\n')
