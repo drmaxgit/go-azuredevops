@@ -14,48 +14,48 @@ type UserEntitlementsService struct {
 
 // UserEntitlements is a wrapper class around the main response for the Get of UserEntitlement
 type UserEntitlements struct {
-	Members           []Item      `json:"members"`
-	ContinuationToken interface{} `json:"continuationToken"`
-	TotalCount        int64       `json:"totalCount"`
-	Items             []Item      `json:"items"`
+	Members           []Item      `json:"members,omitempty"`
+	ContinuationToken interface{} `json:"continuationToken,omitempty"`
+	TotalCount        int64       `json:"totalCount,omitempty"`
+	Items             []Item      `json:"items,omitempty"`
 }
 
 // Item is a wrapper class used by UserEntitlements
 type Item struct {
-	ID                  string        `json:"id"`
+	ID                  string        `json:"id,omitempty"`
 	User                User          `json:"user"`
 	AccessLevel         AccessLevel   `json:"accessLevel"`
-	LastAccessedDate    string        `json:"lastAccessedDate"`
-	DateCreated         string        `json:"dateCreated"`
-	ProjectEntitlements []interface{} `json:"projectEntitlements"`
-	Extensions          []interface{} `json:"extensions"`
-	GroupAssignments    []interface{} `json:"groupAssignments"`
+	LastAccessedDate    string        `json:"lastAccessedDate,omitempty"`
+	DateCreated         string        `json:"dateCreated,omitempty"`
+	ProjectEntitlements []interface{} `json:"projectEntitlements,omitempty"`
+	Extensions          []interface{} `json:"extensions,omitempty"`
+	GroupAssignments    []interface{} `json:"groupAssignments,omitempty"`
 }
 
 // AccessLevel is a wrapper class used by Item
 type AccessLevel struct {
-	LicensingSource    string `json:"licensingSource"`
-	AccountLicenseType string `json:"accountLicenseType"`
-	MSDNLicenseType    string `json:"msdnLicenseType"`
-	LicenseDisplayName string `json:"licenseDisplayName"`
-	Status             string `json:"status"`
-	StatusMessage      string `json:"statusMessage"`
-	AssignmentSource   string `json:"assignmentSource"`
+	LicensingSource    string `json:"licensingSource,omitempty"`
+	AccountLicenseType string `json:"accountLicenseType,omitempty"`
+	MSDNLicenseType    string `json:"msdnLicenseType,omitempty"`
+	LicenseDisplayName string `json:"licenseDisplayName,omitempty"`
+	Status             string `json:"status,omitempty"`
+	StatusMessage      string `json:"statusMessage,omitempty"`
+	AssignmentSource   string `json:"assignmentSource,omitempty"`
 }
 
 // User is a wrapper class used by Item
 type User struct {
-	SubjectKind   string  `json:"subjectKind"`
+	SubjectKind   string  `json:"subjectKind,omitempty"`
 	MetaType      *string `json:"metaType,omitempty"`
-	Domain        string  `json:"domain"`
-	PrincipalName string  `json:"principalName"`
-	MailAddress   string  `json:"mailAddress"`
-	Origin        string  `json:"origin"`
-	OriginID      string  `json:"originId"`
-	DisplayName   string  `json:"displayName"`
-	Links         Links   `json:"_links"`
-	URL           string  `json:"url"`
-	Descriptor    string  `json:"descriptor"`
+	Domain        string  `json:"domain,omitempty"`
+	PrincipalName string  `json:"principalName,omitempty"`
+	MailAddress   string  `json:"mailAddress,omitempty"`
+	Origin        string  `json:"origin,omitempty"`
+	OriginID      string  `json:"originId,omitempty"`
+	DisplayName   string  `json:"displayName,omitempty"`
+	Links         Links   `json:"_links,omitempty"`
+	URL           string  `json:"url,omitempty"`
+	Descriptor    string  `json:"descriptor,omitempty"`
 }
 
 // Links is a wrapper class used by User
@@ -75,8 +75,13 @@ type Avatar struct {
 // Get returns a single user entitlement filtering by the user name in the organization
 // https://docs.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user%20entitlements/search%20user%20entitlements?view=azure-devops-rest-6.0
 func (s *UserEntitlementsService) Get(ctx context.Context, userName string, orgName string) (*UserEntitlements, *http.Response, error) {
-	URL := fmt.Sprintf("/%s/_apis/userentitlements?$filter=name+eq+'%s'&$api-version=6.0-preview.3", orgName, userName)
-	req, err := s.client.NewRequestEx("GET", s.client.VsaexBaseURL, URL, nil)
+	URL := fmt.Sprintf("%s/%s/_apis/userentitlements?$filter=name+eq+'%s'&$api-version=6.0-preview.3",
+		s.client.VsaexBaseURL.String(),
+		orgName,
+		userName,
+	)
+
+	req, err := s.client.NewRequest("GET", URL, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -97,7 +102,7 @@ func (s *UserEntitlementsService) GetUserID(ctx context.Context, userName string
 		return nil, err
 	}
 
-	if len(userEntitlements.Items) > 0{
+	if len(userEntitlements.Items) > 0 {
 		return &userEntitlements.Items[0].ID, nil
 	} else {
 		var nilValue *string = nil
