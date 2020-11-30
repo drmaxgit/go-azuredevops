@@ -15,7 +15,7 @@ type UserEntitlementsService struct {
 // UserEntitlements is a wrapper class around the main response for the Get of UserEntitlement
 type UserEntitlements struct {
 	Members           []Item      `json:"members,omitempty"`
-	ContinuationToken interface{} `json:"continuationToken,omitempty"`
+	ContinuationToken interface{} `json:"continuationToken"`
 	TotalCount        int64       `json:"totalCount,omitempty"`
 	Items             []Item      `json:"items,omitempty"`
 }
@@ -104,8 +104,7 @@ func (s *UserEntitlementsService) GetUserID(ctx context.Context, userName string
 
 	if len(userEntitlements.Items) > 0 {
 		return &userEntitlements.Items[0].ID, nil
-	} else {
-		var nilValue *string = nil
-		return nilValue, nil
 	}
+	var nilValue *string = nil
+	return nilValue, nil
 }
