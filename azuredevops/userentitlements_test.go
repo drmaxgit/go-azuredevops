@@ -88,7 +88,7 @@ func Test_UserEntitlementsGetUserId(t *testing.T) {
 	want := "6416203b-98bb-4910-8f8a-b12aa19a399f"
 
 	if !cmp.Equal(got, &want) {
-		diff := cmp.Diff(got, want)
+		diff := cmp.Diff(got, &want)
 		fmt.Printf(diff)
 		t.Errorf("UserEntitlements.GetUserId returned %+v, want %+v", got, want)
 	}
