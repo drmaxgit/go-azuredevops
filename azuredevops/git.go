@@ -30,7 +30,7 @@ const (
 )
 
 func (d VersionControlChangeType) String() string {
-	return [...]string{"none", "add", "edit", "encoding", "rename", "delete", "undelete", "branch", "merge", "lock", "rollback", "sourceRename", "targetRename", "property", "all"}[d]
+	return [...]string{"None", "Add", "Edit", "Encoding", "Rename", "Delete", "Undelete", "Branch", "Merge", "Lock", "Rollback", "SourceRename", "TargetRename", "Property", "All"}[d]
 }
 
 // GitObjectType enum declaration
