@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -225,7 +226,7 @@ func TestGitService_GetChanges(t *testing.T) {
 
 	changes := &azuredevops.GitChange{
 		ChangeID:   Int(1),
-		ChangeType: String(azuredevops.Add.String()),
+		ChangeType: String(strings.ToLower(azuredevops.Add.String())),
 	}
 	changesList := []*azuredevops.GitChange{changes}
 	want := &azuredevops.GitCommitChanges{
@@ -240,7 +241,7 @@ func TestGitService_GetChanges(t *testing.T) {
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Fprint(w, `{
 			"changeCounts": {
-				"add": 1
+				"Add": 1
 			},
 			"changes": [{
 				"changeId": 1,
