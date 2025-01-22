@@ -82,13 +82,15 @@ func GetSubscriptionID(r *http.Request) string {
 // w.WriteHeader(401)
 // w.Write([]byte("Unauthorized.\n"))
 //
+//
 // Example usage:
 //
-//	func (s *Event) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-//	  payload, err := azuredevops.ValidatePayload(r, s.user, s.pass)
-//	  if err != nil { ... }
-//	  // Process payload...
-//	}
+//     func (s *Event) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+//       payload, err := azuredevops.ValidatePayload(r, s.user, s.pass)
+//       if err != nil { ... }
+//       // Process payload...
+//     }
+//
 func ValidatePayload(r *http.Request, user, pass []byte) (payload []byte, err error) {
 	var body []byte // Raw body that GitHub uses to calculate the signature.
 
@@ -132,19 +134,19 @@ func ValidatePayload(r *http.Request, user, pass []byte) (payload []byte, err er
 //
 // Example usage:
 //
-//	    func (s *EventMonitor) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-//	      payload, err := azuredevops.ValidatePayload(r, s.user, s.pass)
-//	      if err != nil { ... }
-//	      event, err := azuredevops.ParseWebHook(payload)
-//	      if err != nil { ... }
-//	      switch event.PayloadType {
-//		 	 case azuredevops.WorkItemEvent:
-//			        processWorkItemEvent(&event)
-//		     case azuredevops.PullRequestEvent:
-//	             processPullRequestEvent(&event)
-//	      ...
-//	      }
-//	    }
+//     func (s *EventMonitor) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+//       payload, err := azuredevops.ValidatePayload(r, s.user, s.pass)
+//       if err != nil { ... }
+//       event, err := azuredevops.ParseWebHook(payload)
+//       if err != nil { ... }
+//       switch event.PayloadType {
+//	 	 case azuredevops.WorkItemEvent:
+//		        processWorkItemEvent(&event)
+//	     case azuredevops.PullRequestEvent:
+//              processPullRequestEvent(&event)
+//       ...
+//       }
+//     }
 //
 // https://docs.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops
 func ParseWebHook(payload []byte) (*Event, error) {
