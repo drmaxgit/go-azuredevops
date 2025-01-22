@@ -292,7 +292,8 @@ func TestGitService_GetDiffs(t *testing.T) {
 			}`)
 	})
 
-	got, _, err := client.Git.GetDiffs(context.Background(), "o", "p", "r", "master", "prbranch")
+	opts := azuredevops.GitDiffListOptions{}
+	got, _, err := client.Git.GetDiffs(context.Background(), "o", "p", "r", "master", "prbranch", &opts)
 	if err != nil {
 		t.Fatalf("returned error: %v", err)
 	}

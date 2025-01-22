@@ -388,6 +388,20 @@ type GitRefListOptions struct {
 	LatestStatusesOnly bool   `url:"latestStatusesOnly,omitempty"`
 }
 
+// GitDiffListOptions describes what the request to the API should look like
+type GitDiffListOptions struct {
+	Organization         string `url:"organization,omitempty"`
+	RepositoryId         string `url:"repositoryId,omitempty"`
+	Project              string `url:"project,omitempty"`
+	Skip                 string `url:"$skip,omitempty"`
+	Top                  string `url:"$top,omitempty"`
+	BaseVersionOptions   string `url:"baseVersionOptions,omitempty"`
+	BaseVersionType      string `url:"baseVersionType,omitempty"`
+	DiffCommonCommit     string `url:"diffCommonCommit,omitempty"`
+	TargetVersionOptions string `url:"targetVersionOptions,omitempty"`
+	TargetVersionType    string `url:"targetVersionType,omitempty"`
+}
+
 // GitStatusContext Status context that uniquely identifies the status.
 type GitStatusContext struct {
 	Genre *string `json:"genre,omitempty"`
@@ -543,7 +557,7 @@ func (s *GitService) CreateStatus(ctx context.Context, owner, project, repoName,
 // GetDiffs finds the closest common commit (the merge base) between base and target commits,
 // and get the diff between either the base and target commits or common and target commits.
 // https://docs.microsoft.com/en-us/rest/api/azure/devops/git/diffs/get?view=azure-devops-rest-5.1
-func (s *GitService) GetDiffs(ctx context.Context, owner string, project string, repoName string, baseVersion string, targetVersion string) (*GitCommitDiffs, *http.Response, error) {
+func (s *GitService) GetDiffs(ctx context.Context, owner string, project string, repoName string, baseVersion string, targetVersion string, opts *GitDiffListOptions) (*GitCommitDiffs, *http.Response, error) {
 	URL := fmt.Sprintf(
 		"%s/%s/_apis/git/repositories/%s/diffs/commits?api-version=5.1&baseVersion=%s&targetVersion=%s",
 		owner,
@@ -552,6 +566,8 @@ func (s *GitService) GetDiffs(ctx context.Context, owner string, project string,
 		baseVersion,
 		targetVersion,
 	)
+
+	URL, err := addOptions(URL, opts)
 
 	req, err := s.client.NewRequest("GET", URL, nil)
 	if err != nil {
