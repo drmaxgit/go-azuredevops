@@ -1,18 +1,5 @@
 # go-azuredevops
 
-## Status - 4 Jul 2019
-
-I'm working on this library to provide an interface between [Atlantis](https://runatlantis.io) and Azure Devops.  This is my first project in Go.  I'm happy to try and address issues and PRs in my spare time if you see areas that could use improvement. 
-
-My next steps:
-
-- Make all function parameters and return values follow the same pattern
-- Getting all the tests to run again
-
-What I'd like to work on before calling it "good" for my needs:
-
-- Document and test OAuth instead of a personal access token
-- Add some integration tests with a public Azure Devops repo
 
 
 [![GoDoc](https://godoc.org/github.com/mcdafydd/go-azuredevops/azuredevops?status.svg)](https://godoc.org/github.com/mcdafydd/go-azuredevops/azuredevops)
@@ -20,7 +7,7 @@ What I'd like to work on before calling it "good" for my needs:
 [![codecov](https://codecov.io/gh/mcdafydd/go-azuredevops/branch/master/graph/badge.svg)](https://codecov.io/gh/mcdafydd/go-azuredevops)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mcdafydd/go-azuredevops?style=flat-square)](https://goreportcard.com/report/github.com/mcdafydd/go-azuredevops)
 
-This is a fork of https://github.com/benmatselby/go-azuredevops, a Go library for accessing the [Azure DevOps API](https://docs.microsoft.com/en-gb/rest/api/vsts/).  As it develops, the library is looking more like of a port of [go-github](https://github.com/google/go-github).
+This is a fork of https://github.com/mcdafydd/go-azuredevops, a Go library for accessing the [Azure DevOps API](https://docs.microsoft.com/en-gb/rest/api/vsts/).  As it develops, the library is looking more like of a port of [go-github](https://github.com/google/go-github).
 
 ## Services
 
