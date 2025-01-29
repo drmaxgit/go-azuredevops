@@ -1,4 +1,4 @@
-module github.com/mcdafydd/go-azuredevops
+module github.com/drmaxgit/go-azuredevops
 
 require (
 	github.com/google/go-cmp v0.3.1
