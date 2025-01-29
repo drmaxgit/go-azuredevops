@@ -390,16 +390,8 @@ type GitRefListOptions struct {
 
 // GitDiffListOptions describes what the request to the API should look like
 type GitDiffListOptions struct {
-	Organization         string `url:"organization,omitempty"`
-	RepositoryId         string `url:"repositoryId,omitempty"`
-	Project              string `url:"project,omitempty"`
-	Skip                 string `url:"$skip,omitempty"`
-	Top                  string `url:"$top,omitempty"`
-	BaseVersionOptions   string `url:"baseVersionOptions,omitempty"`
-	BaseVersionType      string `url:"baseVersionType,omitempty"`
-	DiffCommonCommit     string `url:"diffCommonCommit,omitempty"`
-	TargetVersionOptions string `url:"targetVersionOptions,omitempty"`
-	TargetVersionType    string `url:"targetVersionType,omitempty"`
+	Skip                 int    `url:"$skip,omitempty"`
+	Top                  int    `url:"$top,omitempty"`
 }
 
 // GitStatusContext Status context that uniquely identifies the status.
@@ -568,6 +560,9 @@ func (s *GitService) GetDiffs(ctx context.Context, owner string, project string,
 	)
 
 	URL, err := addOptions(URL, opts)
+	if err != nil {
+		return nil, nil, err
+	}
 
 	req, err := s.client.NewRequest("GET", URL, nil)
 	if err != nil {
