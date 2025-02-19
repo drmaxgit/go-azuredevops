@@ -9,6 +9,8 @@
 
 This is a fork of https://github.com/mcdafydd/go-azuredevops, a Go library for accessing the [Azure DevOps API](https://docs.microsoft.com/en-gb/rest/api/vsts/).  As it develops, the library is looking more like of a port of [go-github](https://github.com/google/go-github).
 
+
+We forked this repo because we wanted to fix bug in atlantis - PR: https://github.com/runatlantis/atlantis/pull/5298
 ## Services
 
 There is partial implementation for the following services:
