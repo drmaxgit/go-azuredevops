@@ -259,14 +259,14 @@ type GitPullRequestMergeOptions struct {
 
 // GitCommitDiffs describes the difference between two commits
 type GitCommitDiffs struct {
-	AheadCount         *int                              `json:"aheadCount,omitempty"`
-	AllChangesIncluded *bool                             `json:"allChangesIncluded,omitempty"`
-	BaseCommit         *string                           `json:"baseCommit,omitempty"`
-	BehindCount        *int                              `json:"behindCount,omitempty"`
-	ChangeCounts       *map[VersionControlChangeType]int `json:"changeCounts,omitempty"`
-	Changes            []*GitChange                      `json:"changes,omitempty"`
-	CommonCommit       *string                           `json:"commonCommit,omitempty"`
-	TargetCommit       *string                           `json:"targetCommit,omitempty"`
+	AheadCount         *int            `json:"aheadCount,omitempty"`
+	AllChangesIncluded *bool           `json:"allChangesIncluded,omitempty"`
+	BaseCommit         *string         `json:"baseCommit,omitempty"`
+	BehindCount        *int            `json:"behindCount,omitempty"`
+	ChangeCounts       *map[string]int `json:"changeCounts,omitempty"`
+	Changes            []*GitChange    `json:"changes,omitempty"`
+	CommonCommit       *string         `json:"commonCommit,omitempty"`
+	TargetCommit       *string         `json:"targetCommit,omitempty"`
 }
 
 // GitPullRequestMergeStrategy specifies the strategy used to merge the pull request
@@ -390,8 +390,8 @@ type GitRefListOptions struct {
 
 // GitDiffListOptions describes what the request to the API should look like
 type GitDiffListOptions struct {
-	Skip                 int    `url:"$skip,omitempty"`
-	Top                  int    `url:"$top,omitempty"`
+	Skip int `url:"$skip,omitempty"`
+	Top  int `url:"$top,omitempty"`
 }
 
 // GitStatusContext Status context that uniquely identifies the status.
