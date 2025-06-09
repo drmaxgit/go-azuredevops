@@ -1264,9 +1264,9 @@ func (g *GitCommitDiffs) GetBehindCount() int {
 }
 
 // GetChangeCounts returns the ChangeCounts field if it's non-nil, zero value otherwise.
-func (g *GitCommitDiffs) GetChangeCounts() map[VersionControlChangeType]int {
+func (g *GitCommitDiffs) GetChangeCounts() map[string]int {
 	if g == nil || g.ChangeCounts == nil {
-		return map[VersionControlChangeType]int{}
+		return map[string]int{}
 	}
 	return *g.ChangeCounts
 }

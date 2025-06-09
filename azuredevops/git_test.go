@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/drmaxgit/go-azuredevops/azuredevops"
 	"github.com/google/go-cmp/cmp"
-	"github.com/mcdafydd/go-azuredevops/azuredevops"
 )
 
 const (
@@ -269,6 +269,9 @@ func TestGitService_GetDiffs(t *testing.T) {
 		testMethod(t, r, "GET")
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Fprint(w, `{
+			"changeCounts":{
+				"Add":2
+				},
 			"changes": [{
 				"item": {
 					"objectId": "277065fc0114f735f76a0dcb85770f2d22b0d156",

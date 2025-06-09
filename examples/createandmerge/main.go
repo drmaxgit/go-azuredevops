@@ -18,7 +18,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/mcdafydd/go-azuredevops/azuredevops"
+	"github.com/drmaxgit/go-azuredevops/azuredevops"
 	"golang.org/x/crypto/ssh/terminal"
 )
 
